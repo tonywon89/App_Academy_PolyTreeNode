@@ -48,6 +48,40 @@ end
   def inspect
     @value.inspect
   end
+
+  def dfs(target_value)
+    return self if value == target_value
+    return nil if children.empty?
+    children.each do |child|
+       result = child.dfs(target_value)
+       return result unless result.nil?
+    end
+    nil
+  end
+
+  def bfs(target_value)
+    queue = []
+
+    queue.push(self)
+
+    until queue.empty?
+      current_node = queue.shift
+      return current_node if current_node.value == target_value
+      current_node.children.each do |child|
+        queue.push(child)
+      end
+    end
+    nil
+  end
+
+  # def dfs(target_value)
+  #   return self if value == target_value
+  #   return nil if children.empty?
+  #   children.each do |child|
+  #      child.dfs(target_value)
+  #   end
+  # end
+
 end
 
 root = PolyTreeNode.new("Root")
