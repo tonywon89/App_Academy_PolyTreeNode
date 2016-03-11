@@ -14,9 +14,11 @@ class PolyTreeNode
   #   @parent = parent
   #   parent.children
   # end
-  def parent=(parent)
-    @parent = parent
-    parent.children << self
+  def parent=(new_parent)
+    #Alternative way: @parent.children.reject! { |child| child == self}
+    @parent.children.delete(self) unless parent.nil?
+    @parent = new_parent
+    new_parent.children << self unless new_parent.nil?
   end
 
   def children
