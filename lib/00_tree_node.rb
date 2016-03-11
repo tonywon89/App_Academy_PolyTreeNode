@@ -10,19 +10,35 @@ class PolyTreeNode
     @parent
   end
 
+def root_node?
+  parent.nil?
+end
+
   # def assign_parent(parent)
   #   @parent = parent
   #   parent.children
   # end
   def parent=(new_parent)
     #Alternative way: @parent.children.reject! { |child| child == self}
-    @parent.children.delete(self) unless parent.nil?
+    parent.children.delete(self) unless self.root_node?
     @parent = new_parent
     new_parent.children << self unless new_parent.nil?
   end
 
   def children
     @children
+  end
+
+  def add_child(child_node)
+    child_node.parent = self
+  end
+
+  def remove_child(child_node)
+    if children.include?(child_node)
+      child_node.parent = nil
+    else
+      raise "Error! Parent does not have this child."
+    end
   end
 
   def value
