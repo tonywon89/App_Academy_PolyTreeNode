@@ -51,13 +51,22 @@ end
 
   def dfs(target_value)
     return self if value == target_value
-    return nil if children.empty?
     children.each do |child|
+      #Rather than making two recursive calls, we save the return value of the recursive call in a variable, and then (do stuff) with that variable.
        result = child.dfs(target_value)
        return result unless result.nil?
     end
     nil
   end
+
+  # def dfs(target_value)
+  #   return self if value == target_value
+  #   return nil if children.empty?
+  #   children.each do |child|
+  #      child.dfs(target_value)
+  #   end
+  # end
+
 
   def bfs(target_value)
     queue = []
@@ -74,13 +83,6 @@ end
     nil
   end
 
-  # def dfs(target_value)
-  #   return self if value == target_value
-  #   return nil if children.empty?
-  #   children.each do |child|
-  #      child.dfs(target_value)
-  #   end
-  # end
 
 end
 
